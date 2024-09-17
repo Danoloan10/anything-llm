@@ -13,9 +13,13 @@ export function userFromStorage() {
 
 export function baseHeaders(providedToken = null) {
   const token = providedToken || window.localStorage.getItem(AUTH_TOKEN);
-  return {
-    Authorization: token ? `Bearer ${token}` : null,
-  };
+  if (token) {
+    return {
+      Authorization: `Bearer ${token}`,
+    };
+  } else {
+    return { };
+  }
 }
 
 export function safeJsonParse(jsonString, fallback = null) {
